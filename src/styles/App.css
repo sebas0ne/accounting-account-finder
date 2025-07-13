@@ -1,0 +1,90 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  :root {
+    --color-principal: #23a074;
+    --color-secondary: #5bb66a;
+    --color-alternative: #c2d987;
+    --color-complement: #e7e8be;
+    --color-default: #f0f0e8;
+    --color-white: #fff;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+      "Droid Sans", "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: linear-gradient(135deg, #23a074 0%, #5bb66a 100%);
+    min-height: 100vh;
+  }
+  
+  .app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  
+  .search-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 2rem;
+    gap: 1.5rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .search-container.search-active {
+    min-height: auto;
+    padding: 2rem 2rem 1rem;
+    background: rgba(240, 240, 232, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  
+  .welcomeMesagge {
+    text-align: center;
+    color: var(--color-white);
+    margin-top: -10vh;
+  }
+  
+  .welcomeMesagge h1 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .welcomeMesagge p {
+    font-size: 1.2rem;
+    font-weight: 300;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  @media (max-width: 768px) {
+    .search-container {
+      padding: 1rem;
+      gap: 1rem;
+    }
+  
+    .search-container.search-active {
+      padding: 1rem;
+    }
+  
+    .welcomeMesagge h1 {
+      font-size: 1.1rem;
+    }
+
+    .welcomeMesagge p {
+      font-size: 1rem;
+    }
+  }

@@ -1,0 +1,44 @@
+.typeSelector {
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  .typeSelectorButton {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    background: var(--color-white);
+    color: var(--color-principal);
+    font-weight: 300;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  }
+  
+  .typeSelectorButton:hover {
+    background: var(--color-white);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-1px);
+  }
+  
+  .dropdown-arrow {
+    transition: transform 0.3s ease;
+    color: var(--color-principal);
+  }
+  
+  .typeSelectorButton:hover .dropdown-arrow {
+    transform: translateY(1px);
+  }
+  
+  @media (max-width: 768px) {
+    .typeSelectorButton {
+      padding: 0.875rem 1rem;
+      font-size: 0.9rem;
+    }
+  }
+  
