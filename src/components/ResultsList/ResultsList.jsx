@@ -1,6 +1,6 @@
 import "./ResultsList.css"
 
-const ResultsList = ({ results, searchTerm, selectedType }) => {
+const ResultsList = ({ results, searchTerm, selectedType, showingAllAccounts }) => {
   const highlightText = (text, highlight) => {
     if (!highlight) return text
 
@@ -16,7 +16,11 @@ const ResultsList = ({ results, searchTerm, selectedType }) => {
         <h2>
           {selectedType ? (
             <>
-              Cuentas de: <strong>{selectedType.titulo}</strong>
+              Cuentas del tipo: <strong>{selectedType.titulo}</strong>
+            </>
+          ) : showingAllAccounts ? (
+            <>
+              Resultados para: <strong>Ver todas las subcuentas</strong>
             </>
           ) : (
             <>

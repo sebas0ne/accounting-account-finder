@@ -3,17 +3,13 @@
 import { useEffect, useRef } from "react"
 import "./SearchBar.css"
 
-const SearchBar = ({ searchTerm, onSearchChange, onSearch, onClear, isActive, isFilterType}) => {
-  const inputRef = useRef(null);
+const SearchBar = ({ searchTerm, onSearchChange, onSearch, onClear, isActive, onShowAll, onReset }) => {
+  const inputRef = useRef(null)
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      console.log(isFilterType);
       if (searchTerm) {
         onSearch(searchTerm)
-      }
-      else if (searchTerm === "" && isFilterType === "") {
-        handleClear();
       }
     }, 300)
 
@@ -26,7 +22,7 @@ const SearchBar = ({ searchTerm, onSearchChange, onSearch, onClear, isActive, is
 
   const handleClear = () => {
     onClear()
-    if (searchTerm !== "" && isFilterType !== "") {
+    if (searchTerm !== "") {
       console.log(inputRef.current);
       inputRef.current?.focus();
     }
@@ -49,7 +45,17 @@ const SearchBar = ({ searchTerm, onSearchChange, onSearch, onClear, isActive, is
             ✕
           </button>
         )}
-        <div onClick={handleClear} className="search-icon">🔍</div>
+        <div className="search-icon">🔍</div>
+      </div>
+      <div className="search-buttons">
+        <button onClick={onShowAll} className="search-action-button">
+          TODAS LAS SUBCUENTAS
+        </button>
+        {isActive && (
+          <button onClick={onReset} className="search-action-button">
+            INICIO
+          </button>
+        )}
       </div>
     </div>
   )

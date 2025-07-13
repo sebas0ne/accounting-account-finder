@@ -12,7 +12,7 @@ function App() {
   const [selectedType, setSelectedType] = useState(null)
   const [results, setResults] = useState([])
   const [isSearchActive, setIsSearchActive] = useState(false)
-  const [filterType, setFilterType] = useState("")
+  const [showingAllAccounts, setShowingAllAccounts] = useState(false)
 
   // Función para buscar cuentas por código o descripción
   const searchAccounts = (term) => {
@@ -41,11 +41,11 @@ function App() {
     setResults(searchResults)
     setIsSearchActive(true)
     setSelectedType(null)
+    setShowingAllAccounts(false)
   }
 
   // Función para filtrar por tipo de cuenta
   const filterByType = (tipoCode) => {
-    setFilterType(tipoCode);
     const tipo = cuentasData.find((t) => t.codigoT === tipoCode)
     if (tipo) {
       const typeResults = tipo.cuentas.map((cuenta) => ({
@@ -58,6 +58,7 @@ function App() {
       setSelectedType(tipo)
       setIsSearchActive(true)
       setSearchTerm("")
+      setShowingAllAccounts(false)
     }
   }
 
@@ -67,6 +68,36 @@ function App() {
     setSelectedType(null)
     setResults([])
     setIsSearchActive(false)
+    setShowingAllAccounts(false)
+  }
+
+  // Función para mostrar todas las cuentas
+  const showAllAccounts = () => {
+    const allAccounts = []
+    cuentasData.forEach((tipo) => {
+      tipo.cuentas.forEach((cuenta) => {
+        allAccounts.push({
+          ...cuenta,
+          tipoTitulo: tipo.titulo,
+          tipoCode: tipo.codigoT,
+        })
+      })
+    })
+
+    setResults(allAccounts)
+    setIsSearchActive(true)
+    setSelectedType(null)
+    setSearchTerm("")
+    setShowingAllAccounts(true)
+  }
+
+  // Función para regresar al estado original
+  const resetToInitial = () => {
+    setSearchTerm("")
+    setSelectedType(null)
+    setResults([])
+    setIsSearchActive(false)
+    setShowingAllAccounts(false)
   }
 
   return (
@@ -79,11 +110,19 @@ function App() {
           onSearch={searchAccounts}
           onClear={clearSearch}
           isActive={isSearchActive}
-          isFilterType={filterType}
+          onShowAll={showAllAccounts}
+          onReset={resetToInitial}
         />
       </div>
 
-      {isSearchActive && <ResultsList results={results} searchTerm={searchTerm} selectedType={selectedType} onClear={clearSearch} />}
+      {isSearchActive && (
+        <ResultsList
+          results={results}
+          searchTerm={searchTerm}
+          selectedType={selectedType}
+          showingAllAccounts={showingAllAccounts}
+        />
+      )}
 
       {!isSearchActive && (
         <div className="welcomeMesagge">
